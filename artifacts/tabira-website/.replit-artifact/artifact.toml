@@ -1,0 +1,28 @@
+kind = "web"
+previewPath = "/"
+title = "Tabira Health App Website"
+description = "A bilingual Arabic and English website for Tabira, a health and medication reminder app available on Google Play. Includes product pages, theme switching, language switching, and privacy and terms pages."
+version = "1.0.0"
+id = "artifacts/tabira-website"
+router = "path"
+
+[[services]]
+name = "web"
+paths = [ "/" ]
+localPort = 25098
+
+[services.development]
+run = "pnpm --filter @workspace/tabira-website run dev"
+
+[services.production]
+build = [ "pnpm", "--filter", "@workspace/tabira-website", "run", "build" ]
+serve = "static"
+publicDir = "artifacts/tabira-website/dist/public"
+
+[[services.production.rewrites]]
+from = "/*"
+to = "/index.html"
+
+[services.env]
+PORT = "25098"
+BASE_PATH = "/"
