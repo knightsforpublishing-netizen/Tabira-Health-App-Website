@@ -1,23 +1,20 @@
-import { Card, CardContent } from '@/components/ui/card';
-import { AlertCircle } from 'lucide-react';
+import { ArrowLeft, ArrowRight, Home, SearchX } from 'lucide-react';
+import { Link, useLocation } from 'wouter';
 
 export default function NotFound() {
+  const [location] = useLocation();
+  const arabic = location.startsWith('/ar');
   return (
-    <div className="min-h-screen w-full flex items-center justify-center bg-gray-50">
-      <Card className="w-full max-w-md mx-4">
-        <CardContent className="pt-6">
-          <div className="flex mb-4 gap-2">
-            <AlertCircle className="h-8 w-8 text-red-500" />
-            <h1 className="text-2xl font-bold text-gray-900">
-              404 Page Not Found
-            </h1>
-          </div>
-
-          <p className="mt-4 text-sm text-gray-600">
-            Did you forget to add the page to the router?
-          </p>
-        </CardContent>
-      </Card>
-    </div>
+    <main className="site-shell flex min-h-[100dvh] items-center justify-center px-5" dir={arabic ? 'rtl' : 'ltr'}>
+      <div className="w-full max-w-lg text-center">
+        <div className="mx-auto mb-7 flex h-16 w-16 items-center justify-center rounded-2xl bg-[hsl(var(--accent))] text-[hsl(var(--foreground))]"><SearchX size={29} strokeWidth={1.7} /></div>
+        <p className="eyebrow mb-4">{arabic ? 'الصفحة غير موجودة' : 'Page not found'}</p>
+        <h1 className="display text-5xl sm:text-6xl">{arabic ? 'يبدو أننا ابتعدنا قليلاً.' : 'Looks like we wandered.'}</h1>
+        <p className="mx-auto mt-5 max-w-sm text-[hsl(var(--muted-foreground))]">{arabic ? 'الرابط الذي تبحث عنه غير متاح. لنعد إلى مكان واضح.' : 'The page you’re looking for is not here. Let’s get you back to somewhere clear.'}</p>
+        <Link href={arabic ? '/ar' : '/en'} className="focus-ring mt-8 inline-flex items-center gap-2 rounded-full bg-[hsl(var(--primary))] px-5 py-3 font-bold text-[hsl(var(--primary-foreground))] transition-transform hover:-translate-y-0.5">
+          <Home size={17} />{arabic ? 'العودة إلى الرئيسية' : 'Back to home'}{arabic ? <ArrowLeft size={16} /> : <ArrowRight size={16} />}
+        </Link>
+      </div>
+    </main>
   );
 }

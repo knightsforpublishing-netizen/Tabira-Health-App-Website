@@ -1,6 +1,6 @@
-# [Project name]
+# Tabira Health App Website
 
-_Replace the heading above with the project's name, and this line with one sentence describing what this app does for users._
+A bilingual English/Arabic marketing and legal website for Tabira, a privacy-minded medication reminder and organization app.
 
 ## Run & Operate
 
@@ -22,23 +22,36 @@ _Replace the heading above with the project's name, and this line with one sente
 
 ## Where things live
 
-_Populate as you build — short repo map plus pointers to the source-of-truth file for DB schema, API contracts, theme files, etc._
+- `artifacts/tabira-website/` — deployable React + Vite website
+- `artifacts/tabira-website/src/App.tsx` — base-aware route map and document metadata
+- `artifacts/tabira-website/src/pages/landing.tsx` — localized landing page, navigation, and footer
+- `artifacts/tabira-website/src/pages/legal.tsx` — bilingual Privacy Policy and Terms of Service pages
+- `artifacts/tabira-website/src/index.css` — shared Tajawal typography, light/dark tokens, responsive styles
+- `artifacts/tabira-website/public/assets/tabira-icon.png` — Tabira brand/app icon
 
 ## Architecture decisions
 
-_Populate as you build — non-obvious choices a reader couldn't infer from the code (3-5 bullets)._
+- The website is frontend-only; app download actions link directly to the Google Play listing for `com.tabira.app`.
+- Language is route-based (`/en`, `/ar`, and localized legal paths), with RTL applied to Arabic pages.
+- Theme preference is stored in `localStorage` so the light/dark choice persists across routes.
+- Legal page content follows the published Tabira source at `tabira.xyz`, including the non-medical disclaimer and local-storage/analytics disclosures.
 
 ## Product
 
-_Describe the high-level user-facing capabilities of this app once they exist._
+- Introduces Tabira Labs and the Tabira medication reminder app.
+- Supports English and Arabic landing pages with Google Play calls to action.
+- Includes responsive product messaging, values, how-it-works content, contact details, and localized Privacy Policy and Terms of Service pages.
+- Provides accessible theme and language controls plus a localized not-found page.
 
 ## User preferences
 
-_Populate as you build — explicit user instructions worth remembering across sessions._
+- Use Tajawal for both English and Arabic.
+- Keep the visual identity connected to the supplied mint capsule icon and Tabira Labs brand direction.
 
 ## Gotchas
 
-_Populate as you build — sharp edges, "always run X before Y" rules._
+- Keep local asset URLs prefixed with `import.meta.env.BASE_URL` so the website works at its artifact preview path.
+- Legal pages intentionally repeat the source site's reminder reliability and non-medical limitations; do not remove these disclaimers when editing copy.
 
 ## Pointers
 
